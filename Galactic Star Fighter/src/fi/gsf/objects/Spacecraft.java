@@ -137,6 +137,9 @@ public class Spacecraft extends SpaceObject {
 			}
 		}
 		
+		//Check hits on player
+		projectiles.checkObject(this);
+		
 		
 	}
 	

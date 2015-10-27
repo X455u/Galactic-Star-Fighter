@@ -255,4 +255,41 @@ public class GameObject {
 		return c != null && c.a != 0;
 	}
 	
+	/**
+	 * Turn the object slowly to face an angle.
+	 * Use continuously.
+	 * 
+	 * @param angle
+	 * @param speed
+	 */
+	public void slowTurnTo(double angle, double speedPerSecond, int delta) {
+		double oldAngle = this.getAngle();
+		double speed = speedPerSecond * delta / 1000.0;
+		if ( angleBetween(oldAngle, angle) <= speed ) this.rotateTo(angle);
+		else if ( (angle > oldAngle && angle < oldAngle + Math.PI) || (oldAngle > Math.PI && angle < wrapAngle(oldAngle + Math.PI)) ) this.turn(speed);
+		else this.turn(-speed);
+	}
+	
+	/**
+	 * @param angle1
+	 * @param angle2
+	 * @return Returns the angle between given angles
+	 */
+	public double angleBetween(double angle1, double angle2) {
+		double res = Math.abs(angle1 - angle2);
+		if (res > Math.PI) res = 2*Math.PI - res;
+		return res;
+	}
+	
+	/**
+	 * Wraps angle inside 0 and 360.
+	 * 
+	 * @param angle
+	 * @return Returns angle wrapped inside 0 and 360.
+	 */
+	public double wrapAngle(double angle) {
+		if (angle < 0.0) return angle + 2*Math.PI;
+		if (angle > 2*Math.PI) return angle - 2*Math.PI;
+		return angle;
+	}
 }

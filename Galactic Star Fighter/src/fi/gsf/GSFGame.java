@@ -87,8 +87,12 @@ public class GSFGame extends BasicGame {
     		spacecraft.shoot();
     	}
     	
-    	if (container.getInput().isKeyPressed(Input.KEY_SPACE)) {
+    	if (container.getInput().isKeyPressed(Input.KEY_1)) {
         	enemies.respawnSwarmers(40);
+    	}
+    	
+    	if (container.getInput().isKeyPressed(Input.KEY_2)) {
+        	enemies.respawnFighters(5);
     	}
     	
     	camera.position( (worldWidth - width / 2) * spacecraft.getX() / worldWidth, (worldHeight - height / 2) * spacecraft.getY() / worldHeight);
@@ -118,11 +122,11 @@ public class GSFGame extends BasicGame {
     	projectiles.render(camera);
         
     	g.setColor(Color.white);
-//    	g.drawString("Camera x: " + camera.getX(), 50, 50);
-//    	g.drawString("Camera y: " + camera.getY(), 50, 70);
-//    	g.drawString(spacecraft.getInfo(), 50, 90);
-//    	g.drawString("Projectiles: " + projectiles.getSize(), 50, 50);
-//    	g.drawString("MouseX: " + Mouse.getX() + "\nMouseY: " + Mouse.getY(), 50, 70);
+    	g.drawString("Camera x: " + camera.getX(), 50, 50);
+    	g.drawString("Camera y: " + camera.getY(), 50, 70);
+    	g.drawString(spacecraft.getInfo(), 50, 90);
+    	g.drawString("Projectiles: " + projectiles.getSize(), 50, 300);
+    	g.drawString("MouseX: " + Mouse.getX() + "\nMouseY: " + Mouse.getY(), 50, 70);
     	
     	//fun color pick test :P
 //    	for (int x = -50; x < 50; x++) {

@@ -41,13 +41,13 @@ public class ProjectileSystem {
 	 * @param y
 	 * @param direction
 	 * @param velocity
-	 * @param acceleration
+	 * @param retardation
 	 * @param type
 	 * @param damage
 	 * @param side
 	 */
-	public void addProjectile(double x, double y, double velocityX, double velocityY, double acceleration, int type, int damage, int side) {
-		projectiles.add(new Projectile(x, y, velocityX, velocityY, acceleration, type, damage, side));
+	public void addProjectile(double x, double y, double velocityX, double velocityY, double retardation, int type, int damage, int side) {
+		projectiles.add(new Projectile(x, y, velocityX, velocityY, retardation, type, damage, side));
 	}
 	
 	/**
@@ -166,16 +166,16 @@ public class ProjectileSystem {
 			double angle = - Math.atan2(velocityY, velocityX); //IMPORTANT! MINUS!!!
 			
 			if (this.type == ProjectileSystem.TYPE_BULLET) {
-				float aboutHalfOfMaximumDamageOfASingleBullet = 50;
-				Color color = new Color(255 , (int)(200 * Math.pow(0.5 , damage / aboutHalfOfMaximumDamageOfASingleBullet)), 0);
-//				Color color = Color.orange;
-				double v = Math.hypot(velocityX, velocityY);
-				float alpha = 1.0f;
-				if (v < 50) {
-					alpha = (float) Math.max(0, 1.0 + (v - 50) / 50);
-				}
+//				float aboutHalfOfMaximumDamageOfASingleBullet = 50;
+//				Color color = new Color(255 , (int)(200 * Math.pow(0.5 , damage / aboutHalfOfMaximumDamageOfASingleBullet)), 0);
+				Color color = Color.orange;
+//				double v = Math.hypot(velocityX, velocityY);
+//				float alpha = 1.0f;
+//				if (v < 50) {
+//					alpha = (float) Math.max(0, 1.0 + (v - 50) / 50);
+//				}
 				bulletImage.setRotation((float) Math.toDegrees(angle));
-				bulletImage.setAlpha(alpha);
+//				bulletImage.setAlpha(alpha);
 				bulletImage.draw((float)camera.getScreenX(this.x) - bulletImage.getWidth() / 2, (float)camera.getScreenY(this.y) - bulletImage.getHeight() / 2, color);
 			} else if (this.type == ProjectileSystem.TYPE_PLASMA) {
 				//TODO Draw plasma projetile.
@@ -196,7 +196,7 @@ public class ProjectileSystem {
 		 * @return returns true if the projectile is outside of the world.
 		 */
 		public boolean isDeletable() {
-			return Math.abs(this.x) >= GSFGame.getWorldWidth() + 50 || Math.abs(this.y) >= GSFGame.getWorldHeight() + 50 || Math.hypot(velocityX, velocityY) < 5 ;
+			return Math.abs(this.x) >= GSFGame.getWorldWidth() + 50 || Math.abs(this.y) >= GSFGame.getWorldHeight() + 50;// || Math.hypot(velocityX, velocityY) < 5 ;
 		}
 	}
 	
